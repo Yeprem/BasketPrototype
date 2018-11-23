@@ -6,7 +6,7 @@ namespace BasketPrototype.Service.Services
 {
     public interface IBasketService
     {
-        IList<BasketItem> GetItems(Guid basketId);
+        IEnumerable<BasketItem> GetItems(Guid basketId);
         bool TryAddItem(Guid basketId, int productId, int quantity);
         bool TryUpdateItem(Guid basketId, int productId, int quantity);
         bool TryRemoveItem(Guid basketId, int productId);

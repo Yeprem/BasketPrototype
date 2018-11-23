@@ -18,7 +18,7 @@ namespace BasketPrototype.Service
             _logger = logger;
         }
 
-        public IList<BasketItem> GetItems(Guid basketId)
+        public IEnumerable<BasketItem> GetItems(Guid basketId)
         {
             var result = _dataStore.GetOrCreate(basketId);
             return result;

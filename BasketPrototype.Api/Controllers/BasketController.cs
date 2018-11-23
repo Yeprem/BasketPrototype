@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using BasketPrototype.Service.Models;
 using BasketPrototype.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +15,13 @@ namespace BasketPrototype.Api.Controllers
         public BasketController(IBasketService basketService)
         {
             _basketService = basketService;
+        }
+
+        [HttpGet("{basketId}")]
+        public ActionResult<IEnumerable<BasketItem>> Get(Guid basketId)
+        {
+            var result = _basketService.GetItems(basketId);
+            return Ok(result);
         }
 
         // POST api/values
