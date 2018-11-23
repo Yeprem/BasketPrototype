@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketPrototype", "BasketPrototype\BasketPrototype.csproj", "{2D963355-D5F8-45DE-AAC4-C74CC8360628}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketPrototype.Api", "BasketPrototype.Api\BasketPrototype.Api.csproj", "{4DAE366D-8A94-4405-B0FA-C4EAD8981482}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketPrototype.Service", "BasketPrototype.Service\BasketPrototype.Service.csproj", "{4FB98307-C94C-4EBD-B736-6708C17BF401}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2D963355-D5F8-45DE-AAC4-C74CC8360628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2D963355-D5F8-45DE-AAC4-C74CC8360628}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2D963355-D5F8-45DE-AAC4-C74CC8360628}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2D963355-D5F8-45DE-AAC4-C74CC8360628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DAE366D-8A94-4405-B0FA-C4EAD8981482}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DAE366D-8A94-4405-B0FA-C4EAD8981482}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DAE366D-8A94-4405-B0FA-C4EAD8981482}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DAE366D-8A94-4405-B0FA-C4EAD8981482}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FB98307-C94C-4EBD-B736-6708C17BF401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FB98307-C94C-4EBD-B736-6708C17BF401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FB98307-C94C-4EBD-B736-6708C17BF401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FB98307-C94C-4EBD-B736-6708C17BF401}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
