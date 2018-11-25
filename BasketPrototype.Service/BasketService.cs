@@ -2,7 +2,6 @@
 using BasketPrototype.Service.Services;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace BasketPrototype.Service
@@ -18,7 +17,7 @@ namespace BasketPrototype.Service
             _logger = logger;
         }
 
-        public IEnumerable<BasketItem> GetItems(Guid basketId)
+        public IBasket GetOrCreateBasket(Guid basketId)
         {
             var result = _dataStore.GetOrCreate(basketId);
             return result;
@@ -31,7 +30,7 @@ namespace BasketPrototype.Service
             try
             {
                 var basket = _dataStore.GetOrCreate(basketId);
-                basket.Add(new BasketItem { ProductId = productId, Quantity = quantity });
+                basket.Items.Add(new BasketItem { ProductId = productId, Quantity = quantity });
                 result = true;
             }
             catch (Exception ex)
@@ -49,31 +48,12 @@ namespace BasketPrototype.Service
             try
             {
                 var basket = _dataStore.GetOrCreate(basketId);
-                basket.Clear();
+                basket.Items.Clear();
                 result = true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"An error occured while clearing the basket {basketId}");
-            }
-
-            return result;
-        }
-
-        public bool TryRemoveItem(Guid basketId, int productId)
-        {
-            var result = false;
-
-            try
-            {
-                var basket = _dataStore.GetOrCreate(basketId);
-                basket = basket.Where(x => x.ProductId != productId)
-                    .ToList();
-                result = true;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, $"An error occured while removing item {productId} from the basket {basketId}");
             }
 
             return result;
@@ -86,14 +66,22 @@ namespace BasketPrototype.Service
             try
             {
                 var basket = _dataStore.GetOrCreate(basketId);
-                var item = basket.FirstOrDefault(x => x.ProductId == productId);
+                var item = basket.Items.FirstOrDefault(x => x.ProductId == productId);
 
-                if (item != null)
+                if (item == null)
                 {
                     throw new NullReferenceException($"Item {productId} doesn't exist in basket {basketId}");
                 }
 
-                item.Quantity = quantity;
+                if (quantity > 0)
+                {
+                    item.Quantity = quantity;
+                }
+                else
+                {
+                    basket.Items.Remove(item);
+                }
+               
                 result = true;
             }
             catch (Exception ex)

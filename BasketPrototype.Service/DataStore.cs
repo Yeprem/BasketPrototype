@@ -1,31 +1,32 @@
 ﻿using BasketPrototype.Service.Models;
 using BasketPrototype.Service.Services;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace BasketPrototype.Service
 {
     public class DataStore : IDataStore
     {
-        private readonly IDictionary<Guid, IList<BasketItem>> _store;
+        private readonly IDictionary<Guid, Basket> _store;
 
         public DataStore()
         {
-            _store = new Dictionary<Guid, IList<BasketItem>>();
+            _store = new ConcurrentDictionary<Guid, Basket>();
         }
 
-        public IList<BasketItem> GetOrCreate(Guid basketId)
+        public Basket GetOrCreate(Guid basketId)
         {
-            IList<BasketItem> result = null;
+            Basket result = null;
 
-            if (_store.TryGetValue(basketId, out IList<BasketItem> value))
+            if (_store.TryGetValue(basketId, out Basket value))
             {
                 result = value;
             }
             else
             {
-                result = new List<BasketItem>();
-                _store[basketId] = result;
+                result = new Basket { Id = basketId, Items = new List<BasketItem>() };
+                _store.Add(basketId, result);
             }
 
             return result;
