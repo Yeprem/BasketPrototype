@@ -25,7 +25,7 @@ namespace BasketPrototype.Service
             }
             else
             {
-                result = new Basket { Id = basketId, Items = new List<BasketItem>() };
+                result = new Basket { BasketId = basketId, Items = new List<BasketItem>() };
                 _store.Add(basketId, result);
             }
 

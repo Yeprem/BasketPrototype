@@ -1,9 +1,8 @@
 ﻿using BasketPrototype.Client.Models;
 using BasketPrototype.Client.Services;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BasketPrototype.Client
@@ -15,6 +14,7 @@ namespace BasketPrototype.Client
             using (var client = new HttpClient())
             {
                 var response = await client.DeleteAsync($"{endpoint}/{data.Id}");
+                response.EnsureSuccessStatusCode();
             }            
         }
 
@@ -25,6 +25,7 @@ namespace BasketPrototype.Client
             using (var client = new HttpClient())
             {
                 var response = await client.GetAsync($"{endpoint}/{data.Id}");
+                response.EnsureSuccessStatusCode();
                 result.ResponseMessage = response;
                 result.Payload = JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
             }
@@ -36,16 +37,11 @@ namespace BasketPrototype.Client
         {
             using (var client = new HttpClient())
             {
-                var values = new Dictionary<string, string>
-                {
-                   { "basketId", data.Id.ToString() },
-                   { "productId", data.ProductId.ToString() },
-                   { "quantity", data.Quantity.ToString() }
-                };
-
-                var content = new FormUrlEncodedContent(values);
+                var seriazlizedObject = JsonConvert.SerializeObject(data);
+                var content = new StringContent(seriazlizedObject, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync(endpoint, content);
+                response.EnsureSuccessStatusCode();
             }
         }
 
@@ -53,16 +49,11 @@ namespace BasketPrototype.Client
         {
             using (var client = new HttpClient())
             {
-                var values = new Dictionary<string, string>
-                {
-                   { "basketId", data.Id.ToString() },
-                   { "productId", data.ProductId.ToString() },
-                   { "quantity", data.Quantity.ToString() }
-                };
-
-                var content = new FormUrlEncodedContent(values);
+                var seriazlizedObject = JsonConvert.SerializeObject(data);
+                var content = new StringContent(seriazlizedObject, Encoding.UTF8, "application/json");
 
                 var response = await client.PutAsync(endpoint, content);
+                response.EnsureSuccessStatusCode();
             }
         }
     }

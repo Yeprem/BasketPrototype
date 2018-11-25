@@ -1,5 +1,6 @@
 ﻿using BasketPrototype.Client.Models;
 using BasketPrototype.Client.Services;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -8,11 +9,13 @@ namespace BasketPrototype.v1.Client
     public class BasketServiceClient : IBasketServiceClient
     {
         private readonly IHttpRequestHandler _requestHandler;
-        private readonly string _endpoint = "api/v1/basket";
+        private readonly ILogger<BasketServiceClient> _logger;
+        private readonly string _endpoint = "https://localhost:44366/api/v1/basket/";
 
-        public BasketServiceClient(IHttpRequestHandler requestHandler)
+        public BasketServiceClient(IHttpRequestHandler requestHandler, ILogger<BasketServiceClient> logger)
         {
             _requestHandler = requestHandler;
+            _logger = logger;
         }
 
         public async Task<bool> AddItem(Guid basketId, int productId, int quantity)
@@ -26,7 +29,7 @@ namespace BasketPrototype.v1.Client
             }
             catch (Exception ex)
             {
-                //log exception
+                _logger.LogError(ex, "An error occured while adding item to the basket");
             }
 
             return result;
@@ -43,15 +46,15 @@ namespace BasketPrototype.v1.Client
             }
             catch (Exception ex)
             {
-                //log exception
+                _logger.LogError(ex, "An error occured while clearing the basket");
             }
 
             return result;
         }
 
-        public async Task<IBasket> GetOrCreateBasket(Guid basketId)
+        public async Task<Basket> GetOrCreateBasket(Guid basketId)
         {
-            IBasket result = null;
+            Basket result = null;
 
             try
             {
@@ -64,7 +67,7 @@ namespace BasketPrototype.v1.Client
             }
             catch (Exception ex)
             {
-                //log exception
+                _logger.LogError(ex, "An error occured while getting the basket");
             }
 
             return result;
@@ -81,7 +84,7 @@ namespace BasketPrototype.v1.Client
             }
             catch (Exception ex)
             {
-                //log exception
+                _logger.LogError(ex, "An error occured while removing the basket"); 
             }
 
             return result;
@@ -98,7 +101,7 @@ namespace BasketPrototype.v1.Client
             }
             catch (Exception ex)
             {
-                //log exception
+                _logger.LogError(ex, "An error occured while updating the basket");
             }
 
             return result;

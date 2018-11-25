@@ -5,13 +5,13 @@ namespace BasketPrototype.Service.Models
 {
     public interface IBasket
     {
-        Guid Id { get; }
+        Guid BasketId { get; }
         IList<BasketItem> Items { get; }
     }
 
     public class Basket : IBasket
     {
-        public Guid Id { get; set; }
+        public Guid BasketId { get; set; }
         public IList<BasketItem> Items { get; set; }
     }
 

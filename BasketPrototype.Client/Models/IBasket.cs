@@ -1,25 +1,24 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace BasketPrototype.Client.Models
 {
-    public interface IBasket
+    [Serializable]
+    public class BasketItem
     {
-        Guid Id { get; }
-        IEnumerable<IBasketItem> Items { get; }
-    }
-
-    public interface IBasketItem
-    {
-        int ProductId { get; }
-        int Quantity { get; }
+        [JsonProperty(PropertyName = "productId")]
+        public int ProductId { get; }
+        [JsonProperty(PropertyName = "quantity")]
+        public int Quantity { get; }
     }
 
     [Serializable]
-    public class Basket : IBasket
+    public class Basket
     {
-        public Guid Id { get; set; }
-
-        public IEnumerable<IBasketItem> Items { get; set; }
+        [JsonProperty(PropertyName = "basketId")]
+        public Guid BasketId { get; set; }
+        [JsonProperty(PropertyName = "items")]
+        public List<BasketItem> Items { get; set; }
     }
 }
