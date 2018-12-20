@@ -9,6 +9,11 @@ namespace BasketPrototype.Client
 {
     public class HttpRequestHandler : IHttpRequestHandler
     {
+        /*
+            This handler is for sending requests. Because API can have different versions (assumption is V1 currently)
+            endpoint accepted as parameter in all methods.
+        */
+
         public async Task Delete(string endpoint, RequestData data)
         {
             using (var client = new HttpClient())

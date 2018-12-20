@@ -7,6 +7,10 @@ namespace BasketPrototype.Api.Extensions
 {
     public static class DependencyInjectionExtension
     {
+        /*
+            This extension method used to keep service registrations in one place
+        */
+
         public static void InjectDependencies(this IServiceCollection collection, IConfiguration configuration)
         {
             collection.AddSingleton<IDataStore, DataStore>()

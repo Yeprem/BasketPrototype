@@ -6,6 +6,10 @@ namespace BasketPrototype.Client.Extensions
 {
     public static class DependencyInjectionExtension
     {
+        /*
+            This extension method used to keep service registrations in one place
+        */
+
         public static IServiceCollection InjectDependencies(this IServiceCollection collection)
         {
             collection.AddSingleton<IBasketServiceClient, BasketServiceClient>()

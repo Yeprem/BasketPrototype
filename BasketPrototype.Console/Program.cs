@@ -69,6 +69,8 @@ namespace BasketPrototype.Console
             response = client.GetOrCreateBasket(basketId).Result;
             System.Console.WriteLine("Creating Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
 
+            System.Console.WriteLine("Test Ended");
+
             System.Console.ReadLine();
         }
 
