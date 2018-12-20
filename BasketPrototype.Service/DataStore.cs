@@ -15,7 +15,7 @@ namespace BasketPrototype.Service
             _store = new ConcurrentDictionary<Guid, Basket>();
         }
 
-        public Basket GetOrCreate(Guid basketId)
+        public IBasket GetOrCreate(Guid basketId)
         {
             Basket result = null;
 

@@ -33,10 +33,10 @@ namespace BasketPrototype.Api.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{basketId}")]
-        public IActionResult Update(Guid basketId, [FromBody] RequestData data)
+        [HttpPut]
+        public IActionResult Update([FromBody] RequestData data)
         {
-            var result = _basketService.TryUpdateItem(basketId, data.ProductId, data.Quantity);
+            var result = _basketService.TryUpdateItem(data.BasketId, data.ProductId, data.Quantity);
             return result ? Ok() : StatusCode(417);
         }
 

@@ -34,33 +34,33 @@ namespace BasketPrototype.Console
                 System.Console.WriteLine("Creating Basket - false");
             }            
 
-            System.Console.WriteLine("Adding Item");
+            System.Console.WriteLine("Adding Item 1");
             var response2 = client.AddItem(basketId, 1, 1).Result;
-            System.Console.WriteLine("Adding Item - {0}", response2);
+            System.Console.WriteLine("Adding Item 1 - {0}", response2);
 
             response = client.GetOrCreateBasket(basketId).Result;
-            System.Console.WriteLine("Creating Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
+            System.Console.WriteLine("Get Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
 
-            System.Console.WriteLine("Adding Item");
+            System.Console.WriteLine("Adding Item 2");
             var response3 = client.AddItem(basketId, 2, 1).Result;
-            System.Console.WriteLine("Adding Item - {0}", response3);
+            System.Console.WriteLine("Adding Item 2 - {0}", response3);
 
             response = client.GetOrCreateBasket(basketId).Result;
-            System.Console.WriteLine("Creating Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
+            System.Console.WriteLine("Get Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
 
-            System.Console.WriteLine("Updating Item");
+            System.Console.WriteLine("Updating Item 1 Qty to 2");
             var response4 = client.UpdateItem(basketId, 1, 2).Result;
-            System.Console.WriteLine("Updating Item - {0}", response4);
+            System.Console.WriteLine("Updating Item 1 Qty to 2 - {0}", response4);
 
             response = client.GetOrCreateBasket(basketId).Result;
-            System.Console.WriteLine("Creating Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
+            System.Console.WriteLine("Get Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
 
-            System.Console.WriteLine("Removing Item");
+            System.Console.WriteLine("Removing Item 2");
             var response5 = client.RemoveItem(basketId, 2).Result;
-            System.Console.WriteLine("Removing Item - {0}", response5);
+            System.Console.WriteLine("Removing Item 2 - {0}", response5);
 
             response = client.GetOrCreateBasket(basketId).Result;
-            System.Console.WriteLine("Creating Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
+            System.Console.WriteLine("Get Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
 
             System.Console.WriteLine("Clear Basket");
             var response6 = client.ClearBasket(basketId).Result;
@@ -78,7 +78,7 @@ namespace BasketPrototype.Console
 
             foreach (var item in items)
             {
-                sb.Append($"Item Id : {item.ProductId} Qty : {item.Quantity}");
+                sb.Append($"Item Id : {item.ProductId} Qty : {item.Quantity} | ");
             }
 
             return sb.ToString();

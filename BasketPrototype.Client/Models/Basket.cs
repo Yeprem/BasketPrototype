@@ -8,9 +8,9 @@ namespace BasketPrototype.Client.Models
     public class BasketItem
     {
         [JsonProperty(PropertyName = "productId")]
-        public int ProductId { get; }
+        public int ProductId { get; set; }
         [JsonProperty(PropertyName = "quantity")]
-        public int Quantity { get; }
+        public int Quantity { get; set; }
     }
 
     [Serializable]

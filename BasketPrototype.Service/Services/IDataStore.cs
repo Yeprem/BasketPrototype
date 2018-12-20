@@ -5,6 +5,6 @@ namespace BasketPrototype.Service.Services
 {
     public interface IDataStore
     {
-        Basket GetOrCreate(Guid basketId);
+        IBasket GetOrCreate(Guid basketId);
     }
 }
