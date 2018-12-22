@@ -1,4 +1,5 @@
-﻿using BasketPrototype.Client.Extensions;
+﻿using BasketPrototype.Client.Configuration;
+using BasketPrototype.Client.Extensions;
 using BasketPrototype.Client.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,10 +15,10 @@ namespace BasketPrototype.Console
         {
             //setup our DI
             var serviceProvider = new ServiceCollection()
-                .InjectDependencies()
+                .InjectDependencies<Configuration.Configuration>()
                 .BuildServiceProvider();
 
-            System.Console.WriteLine("Starting Test");      
+            System.Console.WriteLine("Starting Test - 1");      
 
             var client = serviceProvider.GetService<IBasketServiceClient>();
             var basketId = Guid.NewGuid();
@@ -69,7 +70,9 @@ namespace BasketPrototype.Console
             response = client.GetOrCreateBasket(basketId).Result;
             System.Console.WriteLine("Creating Basket - Id: {0}, Items : {1}", response.BasketId, GetItems(response.Items));
 
-            System.Console.WriteLine("Test Ended");
+            System.Console.WriteLine("Test - 1 Ended");
+
+
 
             System.Console.ReadLine();
         }

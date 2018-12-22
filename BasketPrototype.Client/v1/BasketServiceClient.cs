@@ -1,4 +1,5 @@
-﻿using BasketPrototype.Client.Models;
+﻿using BasketPrototype.Client.Configuration;
+using BasketPrototype.Client.Models;
 using BasketPrototype.Client.Services;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,13 +10,16 @@ namespace BasketPrototype.v1.Client
     public class BasketServiceClient : IBasketServiceClient
     {
         private readonly IHttpRequestHandler _requestHandler;
+        private readonly IConfiguration _configuration;
         private readonly ILogger<BasketServiceClient> _logger;
-        private readonly string _endpoint = "https://localhost:44366/api/v1/basket/";
+        private readonly string _endpoint;
 
-        public BasketServiceClient(IHttpRequestHandler requestHandler, ILogger<BasketServiceClient> logger)
+        public BasketServiceClient(IHttpRequestHandler requestHandler, IConfiguration configuration, ILogger<BasketServiceClient> logger)
         {
             _requestHandler = requestHandler;
+            _configuration = configuration;
             _logger = logger;
+            _endpoint = $"{_configuration.Url}/v1/basket/";
         }
 
         public async Task<bool> AddItem(Guid basketId, int productId, int quantity)
